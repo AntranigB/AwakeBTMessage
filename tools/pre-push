@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+# Refuse to publish GPS coordinates, by content rather than by branch name.
+set -uo pipefail
+# GPS coordinates, and the shape of a hardware device UDID (physical iPhones).
+PATTERN='42\.4[0-9]{3,}|-76\.4[0-9]{3,}|[0-9A-F]{8}-[0-9A-F]{16}'
+remote="${1:-origin}"
+status=0
+
+while read -r local_ref local_sha remote_ref remote_sha; do
+  [ -z "${local_sha:-}" ] && continue
+  case "$local_sha" in *[!0]*) ;; *) continue ;; esac
+
+  # Scan every commit reachable from the ref being pushed.
+  if git rev-list "$local_sha" 2>/dev/null | while read -r c; do
+        git grep -qE "$PATTERN" "$c" -- . 2>/dev/null && echo "$c" && break
+     done | grep -q .; then
+    echo "" >&2
+    echo "  refused: $local_ref contains coordinates or a device UDID." >&2
+    echo "  never push master; push the clean branch:" >&2
+    echo "      git push $remote public:main" >&2
+    echo "" >&2
+    status=1
+  fi
+done
+exit $status

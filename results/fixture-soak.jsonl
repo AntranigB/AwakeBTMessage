@@ -1,0 +1,106 @@
+{"ms":83906.09884262085,"node":"ANCH","kind":"ack","detail":"phone acked 5663","t":1794736912.869494}
+{"kind":"ack","ms":55.58609962463379,"node":"ANCH","t":1794737129.019999,"detail":"phone acked 25FE"}
+{"node":"ANCH","detail":"advertising as AWAKE-ANCHOR","kind":"log","t":1794737591.233609}
+{"node":"ANCH","detail":"PROBE MODE: one message every 30s","kind":"log","t":1794737591.237154}
+{"node":"ANCH","detail":"probe every 30s","kind":"log","t":1794737591.237238}
+{"kind":"log","node":"ANCH","detail":"phone subscribed (1)","t":1794737592.567505}
+{"kind":"sub","node":"ANCH","detail":"phone subscribed","t":1794737592.567914}
+{"kind":"log","detail":"hello from IPH1 \u2014 iPhone","t":1794737592.628829,"node":"ANCH"}
+{"kind":"hello","detail":"iPhone","t":1794737592.6289968,"node":"IPH1"}
+{"kind":"log","detail":"-> probe 1","t":1794737599.645399,"node":"ANCH"}
+{"kind":"send","detail":"probe 1","t":1794737599.645584,"node":"ANCH"}
+{"detail":"ACK 137B in 102 ms","kind":"log","t":1794737599.737901,"node":"ANCH"}
+{"detail":"acked 137B in 101 ms","kind":"ack","bytes":137,"t":1794737599.738081,"node":"ANCH","ms":101.95302963256836}
+{"kind":"log","node":"ANCH","t":1794737621.2399259,"detail":"-> probe 2"}
+{"kind":"send","node":"ANCH","t":1794737621.240343,"detail":"probe 2"}
+{"kind":"log","detail":"ACK 137B in 39 ms","t":1794737621.277627,"node":"ANCH"}
+{"ms":39.03603553771973,"node":"ANCH","kind":"ack","detail":"acked 137B in 39 ms","t":1794737621.27777,"bytes":137}
+{"kind":"log","node":"ANCH","detail":"-> probe 3 long abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij","t":1794737651.240487}
+{"node":"ANCH","detail":"probe 3 long abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij","t":1794737651.2408361,"kind":"send"}
+{"kind":"log","detail":"ACK 684B in 70 ms","node":"ANCH","t":1794737651.3094091}
+{"kind":"ack","detail":"acked 684B in 70 ms","ms":70.29914855957031,"bytes":684,"node":"ANCH","t":1794737651.309648}
+{"detail":"-> probe 4","kind":"log","t":1794737681.2397141,"node":"ANCH"}
+{"detail":"probe 4","kind":"send","t":1794737681.240065,"node":"ANCH"}
+{"node":"ANCH","kind":"log","detail":"ACK 136B in 40 ms","t":1794737681.278316}
+{"node":"ANCH","kind":"ack","ms":39.71290588378906,"detail":"acked 136B in 39 ms","bytes":136,"t":1794737681.278507}
+{"t":1794737711.241447,"kind":"log","node":"ANCH","detail":"-> probe 5"}
+{"t":1794737711.241895,"kind":"send","node":"ANCH","detail":"probe 5"}
+{"detail":"ACK 136B in 68 ms","kind":"log","t":1794737711.308134,"node":"ANCH"}
+{"ms":68.17913055419922,"detail":"acked 136B in 68 ms","kind":"ack","bytes":136,"node":"ANCH","t":1794737711.308255}
+{"detail":"-> probe 6 long abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij","kind":"log","t":1794737741.240984,"node":"ANCH"}
+{"kind":"send","detail":"probe 6 long abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij","t":1794737741.241259,"node":"ANCH"}
+{"t":1794737741.3381228,"kind":"log","node":"ANCH","detail":"ACK 687B in 98 ms"}
+{"t":1794737741.338238,"ms":98.19197654724121,"kind":"ack","bytes":687,"node":"ANCH","detail":"acked 687B in 98 ms"}
+{"detail":"-> probe 7","kind":"log","t":1794737771.2416592,"node":"ANCH"}
+{"detail":"probe 7","kind":"send","t":1794737771.2419438,"node":"ANCH"}
+{"detail":"ACK 136B in 38 ms","kind":"log","t":1794737771.2782679,"node":"ANCH"}
+{"t":1794737771.278397,"detail":"acked 136B in 38 ms","kind":"ack","ms":38.002967834472656,"bytes":136,"node":"ANCH"}
+{"detail":"-> probe 8","kind":"log","node":"ANCH","t":1794737801.2415972}
+{"detail":"probe 8","kind":"send","node":"ANCH","t":1794737801.242034}
+{"kind":"log","t":1794737801.280425,"node":"ANCH","detail":"ACK 137B in 40 ms"}
+{"ms":40.34996032714844,"kind":"ack","t":1794737801.280626,"detail":"acked 137B in 40 ms","bytes":137,"node":"ANCH"}
+{"detail":"-> probe 9 long abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij","t":1794737831.2422771,"kind":"log","node":"ANCH"}
+{"t":1794737831.242593,"kind":"send","detail":"probe 9 long abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij","node":"ANCH"}
+{"t":1794737831.3105922,"kind":"log","node":"ANCH","detail":"ACK 690B in 70 ms"}
+{"t":1794737831.310773,"ms":69.61178779602051,"kind":"ack","bytes":690,"node":"ANCH","detail":"acked 690B in 69 ms"}
+{"t":1794737861.242274,"detail":"-> probe 10","node":"ANCH","kind":"log"}
+{"t":1794737861.242622,"detail":"probe 10","node":"ANCH","kind":"send"}
+{"detail":"ACK 136B in 37 ms","t":1794737861.278593,"kind":"log","node":"ANCH"}
+{"detail":"acked 136B in 37 ms","bytes":136,"t":1794737861.278753,"kind":"ack","ms":37.48607635498047,"node":"ANCH"}
+{"t":1794737891.242015,"node":"ANCH","kind":"log","detail":"-> probe 11"}
+{"t":1794737891.242375,"node":"ANCH","kind":"send","detail":"probe 11"}
+{"node":"ANCH","t":1794737891.309097,"detail":"ACK 136B in 68 ms","kind":"log"}
+{"node":"ANCH","t":1794737891.309236,"detail":"acked 136B in 68 ms","kind":"ack","ms":68.28022003173828,"bytes":136}
+{"t":1794737921.241767,"detail":"-> probe 12 long abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij","node":"ANCH","kind":"log"}
+{"detail":"probe 12 long abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij","t":1794737921.242169,"node":"ANCH","kind":"send"}
+{"t":1794737921.310471,"detail":"ACK 688B in 70 ms","node":"ANCH","kind":"log"}
+{"t":1794737921.310627,"detail":"acked 688B in 70 ms","ms":70.32585144042969,"bytes":688,"kind":"ack","node":"ANCH"}
+{"t":1794737951.241626,"kind":"log","detail":"-> probe 13","node":"ANCH"}
+{"t":1794737951.242032,"kind":"send","detail":"probe 13","node":"ANCH"}
+{"t":1794737951.3089008,"detail":"ACK 137B in 69 ms","node":"ANCH","kind":"log"}
+{"ms":68.89009475708008,"t":1794737951.3090591,"detail":"acked 137B in 68 ms","bytes":137,"node":"ANCH","kind":"ack"}
+{"t":1794737981.2404962,"kind":"log","detail":"-> probe 14","node":"ANCH"}
+{"t":1794737981.240652,"kind":"send","detail":"probe 14","node":"ANCH"}
+{"t":1794737981.27871,"kind":"log","node":"ANCH","detail":"ACK 136B in 39 ms"}
+{"t":1794737981.2788482,"kind":"ack","detail":"acked 136B in 38 ms","node":"ANCH","bytes":136,"ms":38.80190849304199}
+{"node":"ANCH","kind":"log","detail":"-> probe 15 long abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij","t":1794738011.2412581}
+{"detail":"probe 15 long abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij","node":"ANCH","t":1794738011.2414079,"kind":"send"}
+{"t":1794738011.310518,"kind":"log","detail":"ACK 689B in 69 ms","node":"ANCH"}
+{"ms":69.46706771850586,"t":1794738011.3106651,"kind":"ack","detail":"acked 689B in 69 ms","bytes":689,"node":"ANCH"}
+{"detail":"-> probe 16","node":"ANCH","t":1794738041.24206,"kind":"log"}
+{"detail":"probe 16","node":"ANCH","t":1794738041.242183,"kind":"send"}
+{"detail":"ACK 136B in 37 ms","node":"ANCH","t":1794738041.278638,"kind":"log"}
+{"detail":"acked 136B in 36 ms","t":1794738041.278758,"bytes":136,"ms":36.8349552154541,"node":"ANCH","kind":"ack"}
+{"node":"ANCH","kind":"log","detail":"-> probe 17","t":1794738071.241873}
+{"node":"ANCH","kind":"send","detail":"probe 17","t":1794738071.242004}
+{"node":"ANCH","kind":"log","detail":"ACK 136B in 37 ms","t":1794738071.278679}
+{"ms":37.03022003173828,"kind":"ack","node":"ANCH","bytes":136,"detail":"acked 136B in 37 ms","t":1794738071.278819}
+{"kind":"log","node":"ANCH","detail":"-> probe 18 long abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij","t":1794738101.243042}
+{"t":1794738101.24339,"kind":"send","detail":"probe 18 long abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij","node":"ANCH"}
+{"node":"ANCH","t":1794738101.368585,"detail":"ACK 689B in 126 ms","kind":"log"}
+{"node":"ANCH","t":1794738101.3687382,"detail":"acked 689B in 126 ms","kind":"ack","ms":126.30105018615723,"bytes":689}
+{"node":"ANCH","kind":"log","detail":"-> probe 19","t":1794738131.2426748}
+{"node":"ANCH","kind":"send","detail":"probe 19","t":1794738131.242865}
+{"node":"ANCH","detail":"ACK 138B in 37 ms","kind":"log","t":1794738131.2790709}
+{"node":"ANCH","kind":"ack","detail":"acked 138B in 36 ms","bytes":138,"ms":36.82208061218262,"t":1794738131.279232}
+{"t":1794738161.242929,"kind":"log","detail":"-> probe 20","node":"ANCH"}
+{"t":1794738161.2431521,"kind":"send","detail":"probe 20","node":"ANCH"}
+{"t":1794738161.2788692,"node":"ANCH","detail":"ACK 137B in 37 ms","kind":"log"}
+{"t":1794738161.279008,"kind":"ack","detail":"acked 137B in 36 ms","ms":36.65494918823242,"node":"ANCH","bytes":137}
+{"t":1794738191.243311,"detail":"-> probe 21 long abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij","node":"ANCH","kind":"log"}
+{"node":"ANCH","t":1794738191.2435942,"kind":"send","detail":"probe 21 long abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij"}
+{"node":"ANCH","detail":"ACK 689B in 69 ms","kind":"log","t":1794738191.311212}
+{"node":"ANCH","detail":"acked 689B in 68 ms","kind":"ack","ms":68.511962890625,"t":1794738191.311389,"bytes":689}
+{"detail":"-> probe 22","kind":"log","t":1794738221.243257,"node":"ANCH"}
+{"detail":"probe 22","kind":"send","t":1794738221.243742,"node":"ANCH"}
+{"detail":"ACK 136B in 37 ms","kind":"log","t":1794738221.2795691,"node":"ANCH"}
+{"t":1794738221.279705,"detail":"acked 136B in 37 ms","kind":"ack","ms":37.299156188964844,"bytes":136,"node":"ANCH"}
+{"t":1794738251.24367,"detail":"-> probe 23","node":"ANCH","kind":"log"}
+{"t":1794738251.243962,"detail":"probe 23","node":"ANCH","kind":"send"}
+{"t":1794738251.279608,"kind":"log","detail":"ACK 138B in 37 ms","node":"ANCH"}
+{"ms":36.94009780883789,"t":1794738251.279779,"kind":"ack","detail":"acked 138B in 36 ms","bytes":138,"node":"ANCH"}
+{"kind":"log","node":"ANCH","detail":"advertising as AWAKE-ANCHOR","t":1794738263.666203}
+{"t":1794738267.995099,"node":"ANCH","kind":"log","detail":"phone subscribed (1)"}
+{"t":1794738267.995388,"node":"ANCH","kind":"sub","detail":"phone subscribed"}
+{"detail":"hello from IPH1 \u2014 iPhone","kind":"log","node":"ANCH","t":1794738268.054565}
+{"detail":"iPhone","node":"IPH1","kind":"hello","t":1794738268.054712}

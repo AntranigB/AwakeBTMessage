@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>AW AKE · mesh operations</title>
+<style>
+  :root{
+    --bg:#07090a; --panel:#0d1113; --line:#1b2225; --ink:#e8f1ee;
+    --dim:#5d6f6a; --green:#3ddc84; --amber:#ffb020; --red:#ff5c5c;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0}
+  body{
+    background:var(--bg); color:var(--ink);
+    font:13px/1.45 ui-monospace,SFMono-Regular,Menlo,monospace;
+    display:grid; grid-template-rows:auto 1fr; overflow:hidden;
+  }
+  header{
+    display:flex; align-items:center; gap:18px;
+    padding:14px 22px; border-bottom:1px solid var(--line);
+  }
+  .brand{letter-spacing:.42em; font-size:14px; font-weight:600}
+  .pill{
+    display:inline-flex; align-items:center; gap:7px;
+    padding:4px 10px; border:1px solid var(--line); border-radius:999px;
+    font-size:10px; letter-spacing:.08em; color:var(--dim);
+  }
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--green);
+       box-shadow:0 0 8px var(--green); animation:pulse 2s infinite}
+  @keyframes pulse{50%{opacity:.35}}
+  .spacer{flex:1}
+  main{
+    display:grid; grid-template-columns:1fr 340px; gap:1px;
+    background:var(--line); overflow:hidden;
+  }
+  .col{background:var(--bg); overflow:hidden; display:flex; flex-direction:column}
+  .stats{display:grid; grid-template-columns:repeat(6,1fr); gap:1px; background:var(--line)}
+  .stat{background:var(--panel); padding:14px 18px}
+  .stat .k{font-size:9px;letter-spacing:.14em;color:var(--dim);text-transform:uppercase}
+  .stat .v{font-size:26px;margin-top:4px;font-variant-numeric:tabular-nums}
+  .stat .v.green{color:var(--green)}
+  .stat .v.amber{color:var(--amber)}
+  #mesh{flex:1;min-height:0}
+  #mesh svg{width:100%;height:100%;display:block}
+  .feed{flex:1;overflow-y:auto;padding:6px 0}
+  .row{display:grid;grid-template-columns:58px 52px 1fr;gap:8px;
+       padding:5px 14px;font-size:11px;border-bottom:1px solid #0f1416}
+  .row .t{color:#3c4a46}
+  .row .k{letter-spacing:.06em}
+  .k.send{color:var(--green)} .k.recv{color:#7fd4ff}
+  .k.ack{color:var(--amber)} .k.loc{color:#c08bff}
+  .k.queued{color:var(--amber)} .k.flush{color:var(--green)}
+  .k.log{color:#40514c} .k.sub{color:var(--green)} .k.hello{color:#8fa39d}
+  .k.hb{color:#3c4a46}
+  .row .d{color:#b9cbc6;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .foot{padding:10px 14px;border-top:1px solid var(--line);font-size:10px;color:var(--dim)}
+  .hidden{display:none}
+</style>
+</head>
+<body>
+<header>
+  <span class="brand">AWAKE</span>
+  <span class="pill"><span class="dot" id="live"></span><span id="livetxt">CONNECTING</span></span>
+  <span class="pill">NO WIFI · NO CELL</span>
+  <span class="spacer"></span>
+  <span class="pill" id="clock">--:--:--</span>
+</header>
+
+<main>
+  <section class="col">
+    <div class="stats">
+      <div class="stat"><div class="k">nodes</div><div class="v" id="s-nodes">0</div></div>
+      <div class="stat"><div class="k">messages</div><div class="v" id="s-msgs">0</div></div>
+      <div class="stat"><div class="k">last ack</div><div class="v green" id="s-ack">—</div></div>
+      <div class="stat"><div class="k">p50 ack</div><div class="v green" id="s-p50">—</div></div>
+      <div class="stat"><div class="k">queued</div><div class="v amber" id="s-queued">0</div></div>
+      <div class="stat"><div class="k">locked deliveries</div><div class="v green" id="s-locked">0</div></div>
+    </div>
+    <div id="mesh"></div>
+  </section>
+
+  <section class="col">
+    <div class="feed" id="feed"></div>
+    <div class="foot" id="map">no position yet</div>
+  </section>
+</main>
+
+<script>
+const S = { events: [], nodes: new Set(), msgs: 0, acks: [], locked: 0, queued: 0, lastT: 0 };
+
+const el = id => document.getElementById(id);
+const svgNS = "http://www.w3.org/2000/svg";
+
+function fmtTime(t){
+  const d = new Date(t*1000);
+  return d.toTimeString().slice(0,8);
+}
+
+async function poll(){
+  try{
+    const r = await fetch('/events', {cache:'no-store'});
+    const data = await r.json();
+    el('live').style.background = 'var(--green)';
+    el('livetxt').textContent = 'LINKED';
+    if (data.length < S.lastT) { S.lastT = 0; }  // server restarted
+    if (data.length > S.lastT){
+      const fresh = data.slice(S.lastT);
+      S.lastT = data.length;
+      fresh.forEach(ingest);
+      render();
+    }
+  }catch(e){
+    el('live').style.background = 'var(--red)';
+    el('livetxt').textContent = 'NO DASHBOARD SERVER';
+  }
+}
+
+function ingest(e){
+  S.events.push(e);
+  if (e.node) S.nodes.add(e.node);
+  // A queued message is still a message; it just hasn't been delivered yet.
+  if (e.kind === 'send' || e.kind === 'recv' || e.kind === 'queued') S.msgs++;
+  // Live latency only. A replayed message carries the age of the queue, not
+  // the latency of the link, and averaging the two makes p50 meaningless.
+  if (e.kind === 'ack' && typeof e.ms === 'number' && e.ms < 5000) S.acks.push(e.ms);
+  if (e.locked) S.locked++;
+  if (e.kind === 'queued') S.queued++;
+  if (e.kind === 'flush') S.queued = 0;
+  if (e.kind === 'hb' && e.batt != null) S.batt = e.batt;
+  if (e.kind === 'hb' && e.rssi != null) S.rssi = e.rssi;
+  if (e.kind === 'loc' && e.lat != null) S.pos = e;
+
+  // Positions and heartbeats update the footer; they are not conversation.
+  if (e.kind === 'loc' || e.kind === 'hb') return;
+
+  const f = el('feed');
+  const row = document.createElement('div');
+  row.className = 'row';
+  row.innerHTML = `<span class="t">${fmtTime(e.t)}</span>
+    <span class="k ${e.kind}">${(e.kind||'').toUpperCase()}</span>
+    <span class="d"></span>`;
+  row.querySelector('.d').textContent = e.detail || '';
+  f.prepend(row);
+  while (f.children.length > 250) f.lastChild.remove();
+
+  if (e.kind === 'ack' && typeof e.ms === 'number') pulse();
+}
+
+function pulse(){
+  const ring = document.getElementById('ring');
+  if (!ring) return;
+  ring.setAttribute('r', 26);
+  ring.setAttribute('opacity', 0.9);
+  requestAnimationFrame(()=>{
+    ring.setAttribute('r', 90);
+    ring.setAttribute('opacity', 0);
+  });
+}
+
+/* --- mesh graph --- */
+function render(){
+  const w = el('mesh').clientWidth || 800;
+  const h = el('mesh').clientHeight || 520;
+  const cx = w/2, cy = h/2;
+
+  const names = [...S.nodes].filter(n => n !== 'ANCH');
+  const nodes = [{id:'ANCH', x:cx, y:cy, hub:true}];
+  const R = Math.min(w,h) * 0.36;
+  names.forEach((n,i)=>{
+    const a = (i/Math.max(names.length,1)) * Math.PI*2 - Math.PI/2;
+    nodes.push({id:n, x:cx+Math.cos(a)*R, y:cy+Math.sin(a)*R, hub:false});
+  });
+
+  let g = nodes.map(n=>{
+    const lines = nodes.filter(o=>o!==n).map(o=>{
+      const mid = n.hub || o.hub;
+      return `<line x1="${n.x}" y1="${n.y}" x2="${o.x}" y2="${o.y}"
+        stroke="${mid?'#1f4d3a':'#141b1d'}" stroke-width="${mid?1.2:0.7}"
+        stroke-dasharray="${mid?'0':'3 6'}"/>`;
+    }).join('');
+    return lines;
+  }).join('');
+
+  let circles = nodes.map(n=>`
+    <circle cx="${n.x}" cy="${n.y}" r="${n.hub?22:12}"
+      fill="${n.hub?'#0d2b1f':'#0f1719'}"
+      stroke="${n.hub?'var(--green)':'#2c3b38'}" stroke-width="1.4"/>
+    <text x="${n.x}" y="${n.y + (n.hub?42:26)}" text-anchor="middle"
+      font-size="9" fill="${n.hub?'var(--green)':'#6b7d78'}"
+      letter-spacing="1.5">${n.id}</text>`).join('');
+
+  el('mesh').innerHTML = `<svg viewBox="0 0 ${w} ${h}">
+    <defs>
+      <radialGradient id="glow"><stop offset="0%" stop-color="#3ddc84" stop-opacity=".35"/>
+      <stop offset="100%" stop-color="#3ddc84" stop-opacity="0"/></radialGradient>
+    </defs>
+    <circle cx="${cx}" cy="${cy}" r="${R*0.55}" fill="url(#glow)"/>
+    <circle cx="${cx}" cy="${cy}" r="${R}" fill="none" stroke="#16211d" stroke-width="1"/>
+    <circle cx="${cx}" cy="${cy}" r="${R*1.45}" fill="none" stroke="#111917" stroke-width="1"/>
+    <circle cx="${cx}" cy="${cy}" r="${R*1.9}" fill="none" stroke="#0d1412" stroke-width="1"/>
+    ${g}
+    <circle id="ring" cx="${cx}" cy="${cy}" r="26" fill="none"
+      stroke="var(--green)" opacity="0"/>
+    ${circles}
+  </svg>`;
+
+  el('s-nodes').textContent = S.nodes.size;
+  el('s-msgs').textContent = S.msgs;
+  el('s-ack').textContent = S.acks.length
+    ? Math.round(S.acks[S.acks.length-1]) + 'ms' : '—';
+  el('s-locked').textContent = S.locked;
+  el('s-queued').textContent = S.queued;
+
+  if (S.acks.length){
+    const sorted = [...S.acks].sort((a,b)=>a-b);
+    const p50 = sorted[Math.floor(sorted.length*0.5)];
+    el('s-p50').textContent = Math.round(p50) + 'ms';
+  }
+
+  const bits = [];
+  if (S.pos) bits.push(`phone position ${S.pos.lat.toFixed(5)}, ${S.pos.lon.toFixed(5)} · ${S.pos.node}`);
+  if (S.batt != null) bits.push(`phone battery ${S.batt}%`);
+  if (S.rssi != null) bits.push(`signal ${S.rssi} dBm`);
+  if (bits.length) el('map').textContent = bits.join('   ·   ');
+}
+
+setInterval(()=>{ el('clock').textContent = new Date().toTimeString().slice(0,8); }, 1000);
+setInterval(poll, 400);
+poll();
+window.addEventListener('resize', render);
+</script>
+</body>
+</html>
